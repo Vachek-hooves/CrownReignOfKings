@@ -1,7 +1,16 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, Platform } from 'react-native';
+import {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { launchImageLibrary } from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {MainImageLayout} from '../components/Layout';
 
 const USER_KEY = '@user_data';
 
@@ -17,7 +26,7 @@ const ProfileScreen = () => {
     try {
       const userData = await AsyncStorage.getItem(USER_KEY);
       if (userData) {
-        const { name, image } = JSON.parse(userData);
+        const {name, image} = JSON.parse(userData);
         setName(name);
         setImage(image);
       }
@@ -28,7 +37,7 @@ const ProfileScreen = () => {
 
   const saveUserData = async () => {
     try {
-      const userData = JSON.stringify({ name, image });
+      const userData = JSON.stringify({name, image});
       await AsyncStorage.setItem(USER_KEY, userData);
     } catch (error) {
       console.error('Error saving user data:', error);
@@ -43,39 +52,41 @@ const ProfileScreen = () => {
       maxWidth: 200,
     };
 
-    launchImageLibrary(options, (response) => {
+    launchImageLibrary(options, response => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        const source = { uri: response.assets[0].uri };
+        const source = {uri: response.assets[0].uri};
         setImage(source.uri);
       }
     });
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={pickImage}>
-        {image ? (
-          <Image source={{ uri: image }} style={styles.profileImage} />
-        ) : (
-          <View style={styles.placeholderImage}>
-            <Text>Tap to add image</Text>
-          </View>
-        )}
-      </TouchableOpacity>
-      <TextInput
-        style={styles.input}
-        onChangeText={setName}
-        value={name}
-        placeholder="Enter your name"
-      />
-      <TouchableOpacity style={styles.saveButton} onPress={saveUserData}>
-        <Text style={styles.saveButtonText}>Save</Text>
-      </TouchableOpacity>
-    </View>
+    <MainImageLayout>
+      <View style={{marginHorizontal: 30}}>
+        <TouchableOpacity onPress={pickImage}>
+          {image ? (
+            <Image source={{uri: image}} style={styles.profileImage} />
+          ) : (
+            <View style={styles.placeholderImage}>
+              <Text>Tap to add image</Text>
+            </View>
+          )}
+        </TouchableOpacity>
+        <TextInput
+          style={styles.input}
+          onChangeText={setName}
+          value={name}
+          placeholder="Enter your name"
+        />
+        <TouchableOpacity style={styles.saveButton} onPress={saveUserData}>
+          <Text style={styles.saveButtonText}>Save</Text>
+        </TouchableOpacity>
+      </View>
+    </MainImageLayout>
   );
 };
 
@@ -121,5 +132,3 @@ const styles = StyleSheet.create({
 });
 
 export default ProfileScreen;
-
-  

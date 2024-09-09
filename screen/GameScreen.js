@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { CROWN_DATA } from '../data/crown_data';
+import React, {useState, useEffect} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {CROWN_DATA} from '../data/crown_data';
+import {MainImageLayout} from '../components/Layout';
 
 const GameScreen = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -8,15 +9,19 @@ const GameScreen = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
 
-  const currentQuestion = CROWN_DATA[currentCategory].questionsArray[currentQuestionIndex];
+  const currentQuestion =
+    CROWN_DATA[currentCategory].questionsArray[currentQuestionIndex];
 
-  const handleOptionPress = (option) => {
+  const handleOptionPress = option => {
     setSelectedOption(option);
     setIsCorrect(option === currentQuestion.correct);
   };
 
   const nextQuestion = () => {
-    if (currentQuestionIndex < CROWN_DATA[currentCategory].questionsArray.length - 1) {
+    if (
+      currentQuestionIndex <
+      CROWN_DATA[currentCategory].questionsArray.length - 1
+    ) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else if (currentCategory < CROWN_DATA.length - 1) {
       setCurrentCategory(currentCategory + 1);
@@ -30,28 +35,29 @@ const GameScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.question}>{currentQuestion.question}</Text>
-      {currentQuestion.options.map((option, index) => (
-        <TouchableOpacity
-          key={index}
-          style={[
-            styles.option,
-            selectedOption === option && isCorrect && styles.correctOption,
-            selectedOption === option && !isCorrect && styles.incorrectOption,
-          ]}
-          onPress={() => handleOptionPress(option)}
-          disabled={selectedOption !== null}
-        >
-          <Text style={styles.optionText}>{option}</Text>
-        </TouchableOpacity>
-      ))}
-      {selectedOption && (
-        <TouchableOpacity style={styles.nextButton} onPress={nextQuestion}>
-          <Text style={styles.nextButtonText}>Next Question</Text>
-        </TouchableOpacity>
-      )}
-    </View>
+    <MainImageLayout>
+      <View>
+        <Text style={styles.question}>{currentQuestion.question}</Text>
+        {currentQuestion.options.map((option, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[
+              styles.option,
+              selectedOption === option && isCorrect && styles.correctOption,
+              selectedOption === option && !isCorrect && styles.incorrectOption,
+            ]}
+            onPress={() => handleOptionPress(option)}
+            disabled={selectedOption !== null}>
+            <Text style={styles.optionText}>{option}</Text>
+          </TouchableOpacity>
+        ))}
+        {selectedOption && (
+          <TouchableOpacity style={styles.nextButton} onPress={nextQuestion}>
+            <Text style={styles.nextButtonText}>Next Question</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    </MainImageLayout>
   );
 };
 

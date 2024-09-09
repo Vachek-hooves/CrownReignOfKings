@@ -8,11 +8,11 @@ import {
 import React from 'react';
 import {COLORS} from '../../constant/color';
 
-const MainImageLayout = ({children}) => {
+const MainImageLayout = ({children, style}) => {
   return (
     <ImageBackground
       source={require('../../assets/img/bg/crown1.png')}
-      style={{flex: 1}}>
+      style={[{flex: 1, padding: 10}, style]}>
       <View
         style={{
           ...StyleSheet.absoluteFillObject,
