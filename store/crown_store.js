@@ -4,6 +4,7 @@ import {CROWN_DATA} from '../data/crown_data';
 
 export const CrownContext = createContext({
   crownQuiz: [],
+  resetQuiz: () => {},
 });
 
 export const CrownProvider = ({children}) => {
@@ -25,7 +26,17 @@ export const CrownProvider = ({children}) => {
     }
   };
 
-  const value = {crownQuiz};
+  const resetQuiz = async () => {
+    try {
+      await saveCrownQuiz(CROWN_DATA);
+      const data = await fetchCrownQuiz();
+      setCrownQuiz(data);
+    } catch (error) {
+      throw new Error('Reset Crown Quiz error', error);
+    }
+  };
+
+  const value = { crownQuiz, resetQuiz };
   return (
     <CrownContext.Provider value={value}>{children}</CrownContext.Provider>
   );
