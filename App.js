@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {CrownProvider} from './store/crown_store';
 import {Text} from 'react-native';
-import {MainScreen, WelcomeScreen} from './screen';
+import {MainScreen, WelcomeScreen,GameScreen} from './screen';
 import ProfileScreen from './screen/ProfileScreen';
 import { COLORS } from './constant/color';
 
@@ -49,13 +49,10 @@ const TabNavigator = () => {
     >
       <Tab.Screen name="Main" component={MainScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Game" component={GameScreen} />
     </Tab.Navigator>
   );
 };
-
-
-
-
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
