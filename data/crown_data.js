@@ -594,3 +594,75 @@ export const CROWN_DATA = [
     ],
   },
 ];
+
+export const FACTS = [
+  {
+    id: 'fa1',
+    name: 'The Crown of Saint Edward',
+    fact: 'One of the oldest crowns of Great Britain, used for the coronation of English monarchs since 1066. It symbolizes the sanctity and divine legitimacy of royal authority.',
+    image: '',
+  },
+  {
+    id: 'fa2',
+    name: 'The French Crown of Louis IX',
+    fact: 'Made in the 13th century, this crown became a symbol of the saintly royal status. Louis IX, also known as Saint Louis, was canonized for his devout rule.',
+    image: '',
+  },
+  {
+    id: 'fa3',
+    name: 'The Crown of the Holy Roman Empire',
+    fact: 'Crafted in the 11th century, this crown was a significant symbol of imperial authority in the Holy Roman Empire and featured numerous precious stones and gold embellishments.',
+    image: '',
+  },
+  {
+    id: 'fa4',
+    name: 'The Crown of the Spanish Monarchs',
+    fact: 'Noted for its opulence, it includes gilded and red enamel, symbolizing the unification of Castile and Aragon under the Catholic Monarchs.',
+    image: '',
+  },
+  {
+    id: 'fa5',
+    name: 'The Crown of the Duke of Kiel',
+    fact: 'Made in the 16th century, this crown is a striking example of Renaissance art. It held great significance for the Dukes of Kiel and symbolized their power in medieval Europe.',
+    image: '',
+  },
+  {
+    id: 'fa6',
+    name: 'The Danish Crown',
+    fact: 'Worn by Danish kings since the 15th century, this crown is distinguished by its simple yet elegant design and use of northern motifs.',
+    image: '',
+  },
+  {
+    id: 'fa7',
+    name: 'The Prussian Crown',
+    fact: 'Crafted for the coronation of the Prussian king in the 18th century, this crown is noted for its stern appearance and symbolized the absolutist power of the Prussian monarchs.',
+    image: '',
+  },
+];
+
+export const ENCYCLOPEDIA = [
+  {
+    name: 'Charles the Great',
+    story:
+      'Charlemagne, also known as Charles the Great, was the King of the Franks from 768 and Emperor of the Holy Roman Empire from 800. He united a significant part of Western Europe, restoring political unity after the fall of the Roman Empire and laying the foundations for the future development of European states. Under his rule, the empire reached its peak, known as the Carolingian Renaissance. Charlemagne implemented administrative reforms, such as codifying laws and organizing administrative structures, which allowed him to effectively govern the vast empire. He also actively supported education, establishing schools and scriptoria that helped preserve and develop knowledge. Additionally, Charlemagne was a powerful defender of Christianity, engaging in missionary activities and religious reforms that strengthened the church.',
+    image: require('../assets/img/encyclopedia/CharlesGreat.png'),
+  },
+  {
+    name: 'Elizabeth I (England)',
+    story:
+      'Elizabeth I, Queen of England from 1558 to 1603, became a symbol of stability and revival after religious and political upheavals. Her reign, known as the Elizabethan Era, brought significant achievements in literature, science, and maritime exploration. Elizabeth demonstrated outstanding political wisdom, enabling her to manage numerous challenges, such as religious wars and threats from Spain. Her diplomatic skills ensured peace and stability in the country, as well as important trade agreements that contributed to economic growth. Elizabeth supported the development of the English Renaissance, which became a golden age of English culture, thanks to prominent figures like William Shakespeare. Her reign also saw major geographical discoveries as English explorers expanded British territories and influence.',
+    image: require('../assets/img/encyclopedia/elizabeth1.png'),
+  },
+  {
+    name: 'Louis XIV (France)',
+    story:
+      "Louis XIV, known as the Sun King, ruled France from 1643 to 1715, and his reign became a symbol of absolute monarchy. Louis XIV centralized power, eliminating all possible opposition and controlling all aspects of state governance. His reign is also known for the construction of the Palace of Versailles, which became the political and cultural center of France. The Palace of Versailles not only served as the king's residence but also symbolized his power and absolute authority. Louis XIV actively pursued military conquests and expansion of French influence, leading to numerous wars, such as the War of the Spanish Succession. Although his ambitions brought significant territorial gains to France, they also imposed a heavy financial burden on the country, ultimately contributing to economic and social problems.",
+    image: require('../assets/img/encyclopedia/louis.png'),
+  },
+  {
+    name: 'Frederick the Great (Prussia)',
+    story:
+      "Frederick the Great, or Frederick II, ruled Prussia from 1740 to 1786 and left a significant mark on history through his military and administrative reforms. Frederick the Great was regarded as an outstanding military leader and strategist, with his reign known for numerous victories in wars, particularly during the Seven Years' War. He implemented a series of reforms in government that included centralizing power, modernizing the army and administration, which allowed Prussia to become one of the leading European powers. Frederick the Great also supported cultural and scientific development, fostering the work of notable figures such as Voltaire and Goethe. His reign was a period of significant social and economic changes, which laid the foundation for the future development of Germany.",
+    image: require('../assets/img/encyclopedia/fredy.png'),
+  },
+];
