@@ -5,18 +5,44 @@ import {CrownProvider} from './store/crown_store';
 import {Text} from 'react-native';
 import {MainScreen, WelcomeScreen} from './screen';
 import ProfileScreen from './screen/ProfileScreen';
-
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+import { COLORS } from './constant/color';
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator 
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: COLORS.beige,
+          borderTopWidth: 0,
+          elevation: 0,
+          shadowOpacity: 0,
+          height: 60,
+          paddingBottom: 5,
+        },
+        tabBarActiveTintColor: COLORS.yellow,
+        tabBarInactiveTintColor: COLORS.darkBeige,
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: 'bold',
+        },
+        tabBarItemStyle: {
+          paddingVertical: 5,
+        },
+      }}
+    >
       <Tab.Screen name="Main" component={MainScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 };
+
+
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+
 
 function App() {
   return (
