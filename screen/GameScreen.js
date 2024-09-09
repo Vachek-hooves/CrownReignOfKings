@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {CROWN_DATA} from '../data/crown_data';
 import {MainImageLayout} from '../components/Layout';
+// update
 
 const GameScreen = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
