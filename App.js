@@ -4,9 +4,19 @@ import {NavigationContainer} from '@react-navigation/native';
 import {CrownProvider} from './store/crown_store';
 import {Text} from 'react-native';
 import {MainScreen, WelcomeScreen} from './screen';
+import ProfileScreen from './screen/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Main" component={MainScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+};
 
 function App() {
   return (
@@ -22,3 +32,4 @@ function App() {
 }
 
 export default App;
+
