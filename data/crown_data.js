@@ -448,7 +448,6 @@ export const CROWN_DATA = [
       },
     ],
   },
-
   {
     id: 'royal',
     name: 'The Royal Heir',
