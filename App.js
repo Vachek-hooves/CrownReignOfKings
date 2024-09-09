@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {CrownProvider} from './store/crown_store';
 import {Text} from 'react-native';
-import {WelcomeScreen} from './screen';
+import {MainScreen, WelcomeScreen} from './screen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -14,6 +14,7 @@ function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+          <Stack.Screen name="MainScreen" component={MainScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </CrownProvider>

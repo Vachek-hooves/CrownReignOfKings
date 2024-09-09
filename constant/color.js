@@ -7,4 +7,5 @@ export const COLORS = {
   black: '#343131',
   neonBlue: '#04D9FF',
   neonRed: '#FD1C03',
+  gold: '#FFDE4D',
 };
