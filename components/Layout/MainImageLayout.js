@@ -1,11 +1,25 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  ImageBackground,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
+import {COLORS} from '../../constant/color';
 
-const MainImageLayout = () => {
+const MainImageLayout = ({children}) => {
   return (
-    <View>
-      <Text>MainImageLayout</Text>
-    </View>
+    <ImageBackground
+      source={require('../../assets/img/bg/crown1.png')}
+      style={{flex: 1}}>
+      <View
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          backgroundColor: COLORS.blue + 90,
+        }}></View>
+      <SafeAreaView>{children}</SafeAreaView>
+    </ImageBackground>
   );
 };
 

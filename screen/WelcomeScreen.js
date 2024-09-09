@@ -16,7 +16,7 @@ const WelcomeScreen = ({navigation}) => {
   useEffect(() => {
     Animated.timing(animation, {
       toValue: 1,
-      duration: 500,
+      duration: 1500,
       useNativeDriver: true,
     }).start(() => navigation.navigate('MainScreen'));
   }, [animation]);
