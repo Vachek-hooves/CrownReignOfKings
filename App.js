@@ -13,12 +13,28 @@ const TabNavigator = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: COLORS.beige,
-          borderTopWidth: 0,
+          position: 'absolute',
+          bottom: 25,
+          left: 20,
+          right: 20,
           elevation: 0,
-          shadowOpacity: 0,
-          height: 60,
-          paddingBottom: 5,
+          backgroundColor: COLORS.beige,
+          borderRadius: 15,
+          height: 90,
+          ...Platform.select({
+            ios: {
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 10,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.5,
+            },
+            android: {
+              elevation: 5,
+            },
+          }),
         },
         tabBarActiveTintColor: COLORS.yellow,
         tabBarInactiveTintColor: COLORS.darkBeige,
@@ -36,6 +52,8 @@ const TabNavigator = () => {
     </Tab.Navigator>
   );
 };
+
+
 
 
 
