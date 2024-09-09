@@ -18,7 +18,7 @@ const WelcomeScreen = ({navigation}) => {
       toValue: 1,
       duration: 1500,
       useNativeDriver: true,
-    }).start(() => navigation.navigate('MainScreen'));
+    }).start(() => navigation.navigate('TabNavigator'));
   }, [animation]);
   return (
     <View style={{flex: 1}}>

@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{headerShown: false}}>
       <Tab.Screen name="Main" component={MainScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
@@ -22,9 +22,14 @@ function App() {
   return (
     <CrownProvider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+            animation: 'fade_from_bottom',
+            animationDuration: 1000,
+          }}>
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-          <Stack.Screen name="MainScreen" component={MainScreen} />
+          <Stack.Screen name="TabNavigator" component={TabNavigator} />
         </Stack.Navigator>
       </NavigationContainer>
     </CrownProvider>
@@ -32,4 +37,3 @@ function App() {
 }
 
 export default App;
-
