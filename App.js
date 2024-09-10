@@ -14,6 +14,7 @@ import {COLORS} from './constant/color';
 import IconKingdom from './components/icons/IconKingdom';
 import {IconProfile, IconQuiz} from './components/icons';
 import IconTabCrown from './components/icons/IconTabCrown';
+import QuizPlayScreen from './screen/QuizPlayScreen';
 
 const TabNavigator = () => {
   return (
@@ -33,7 +34,7 @@ const TabNavigator = () => {
           backgroundColor: COLORS.black,
           marginTop: 20,
           paddingTop: 30,
-          marginTop:10,
+          marginTop: 10,
           ...Platform.select({
             ios: {
               shadowColor: '#000',
@@ -57,7 +58,7 @@ const TabNavigator = () => {
         },
         // tabBarItemStyle: {
         //   // paddingVertical: 5,
-          
+
         // },
         title: '',
         // contentStyle: {
@@ -105,6 +106,7 @@ function App() {
           }}>
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          <Stack.Screen name="QuizPlayScreen" component={QuizPlayScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </CrownProvider>
