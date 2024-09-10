@@ -47,7 +47,7 @@ const ProfileScreen = () => {
     }
   };
 
-  const handleImage = (images) => {
+  const handleImage = images => {
     if (images && images.length > 0) {
       setImage(images[0]);
     }
@@ -55,15 +55,9 @@ const ProfileScreen = () => {
 
   return (
     <MainImageLayout>
-      <View style={{marginHorizontal: 30}}>
+      <View style={styles.container}>
         <ImagePicker handleImage={handleImage} btnStyle={styles.imagePicker}>
-          {image ? (
-            <Image source={{uri: image}} style={styles.profileImage} />
-          ) : (
-            <View style={styles.placeholderImage}>
-              <Text>Tap to add image</Text>
-            </View>
-          )}
+          {image && <Image source={{uri: image}} style={styles.profileImage} />}
         </ImagePicker>
         <TextInput
           style={styles.input}
@@ -77,9 +71,7 @@ const ProfileScreen = () => {
         {saveMessage ? (
           <Text style={styles.saveMessage}>{saveMessage}</Text>
         ) : null}
-        {name && (
-          <Text style={styles.displayName}>Current name: {name}</Text>
-        )}
+        {name && <Text style={styles.displayName}>Current name: {name}</Text>}
       </View>
     </MainImageLayout>
   );
@@ -87,16 +79,17 @@ const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
   },
   profileImage: {
-    width: 150,
-    height: 150,
+    width: '100%',
+    height: '100%',
     borderRadius: 75,
-    marginBottom: 20,
+    // marginBottom: 20,
+    zIndex: 100,
   },
   placeholderImage: {
     width: 150,

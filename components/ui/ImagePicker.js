@@ -1,8 +1,9 @@
+import {TouchableOpacity, View, Text, StyleSheet, Alert} from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
 import React from 'react';
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
+import {COLORS} from '../../constant/color';
 
-const ImagePicker = ({ handleImage, children, btnStyle }) => {
+const ImagePicker = ({handleImage, children, btnStyle}) => {
   const handleResponse = response => {
     if (response.didCancel) {
       Alert.alert('Operation canceled');
@@ -23,7 +24,9 @@ const ImagePicker = ({ handleImage, children, btnStyle }) => {
   };
 
   return (
-    <TouchableOpacity style={[styles.container, btnStyle]} onPress={phoneLibrary}>
+    <TouchableOpacity
+      style={[styles.container, btnStyle]}
+      onPress={phoneLibrary}>
       {children || (
         <View style={styles.placeholder}>
           <Text style={styles.placeholderText}>Tap to add image</Text>
@@ -39,9 +42,10 @@ const styles = StyleSheet.create({
     height: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 75,
+    borderRadius: 80,
     overflow: 'hidden',
-    backgroundColor: '#e1e1e1',
+    // backgroundColor: '#e1e1e1',
+    backgroundColor: COLORS.beige + 50,
   },
   placeholder: {
     flex: 1,
