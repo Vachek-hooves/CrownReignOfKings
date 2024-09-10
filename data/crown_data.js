@@ -3,6 +3,8 @@ export const CROWN_DATA = [
     id: 'war1',
     name: 'War or Peace',
     isActive: true,
+    about:
+      'Your father, the esteemed king of the grand kingdom of Arden, has recently passed away, and the throne has passed to you. From the very start, your reign is fraught with complex challenges: enemies at the borders, court intrigues, discontent among the peasants, and economic instability. Your task is to make crucial decisions that will shape the fate of the kingdom and your legacy as a ruler.',
     questionsArray: [
       {
         id: 'war1',
@@ -226,6 +228,8 @@ export const CROWN_DATA = [
   {
     id: 'tax1',
     name: 'Peasant Rebellion',
+    about:
+      'Due to increased taxes to fund the army, peasants are beginning to revolt. You face demands for change or the situation will escalate.',
     isActive: true,
     questionsArray: [
       {
@@ -451,6 +455,8 @@ export const CROWN_DATA = [
   {
     id: 'royal',
     name: 'The Royal Heir',
+    about:
+      'You must choose your successor. Your children have different abilities and ambitions: one is a military leader, another is a diplomat and strategist. The choice of heir will have a decisive impact on the future of the kingdom.',
     isActive: true,
     questionsArray: [
       {
