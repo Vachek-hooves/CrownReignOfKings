@@ -18,6 +18,7 @@ const GameScreen = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
   const [totalQuestions, setTotalQuestions] = useState(0);
+  console.log(crownQuiz);
 
   useEffect(() => {
     // Calculate total number of questions across all categories
@@ -39,6 +40,17 @@ const GameScreen = () => {
       currentQuestionIndex +
       1;
     return (questionsSoFar / totalQuestions) * 100;
+  };
+
+  const getRemainingQuestions = () => {
+    return (
+      totalQuestions -
+      (crownQuiz
+        .slice(0, currentCategory)
+        .reduce((sum, category) => sum + category.questionsArray.length, 0) +
+        currentQuestionIndex +
+        1)
+    );
   };
 
   const handleOptionPress = option => {
@@ -66,6 +78,12 @@ const GameScreen = () => {
   return (
     <MainImageLayout>
       <ScrollView>
+        <View style={styles.progressInfoContainer}>
+          <Text style={styles.progressInfoText}>
+            Remaining: {getRemainingQuestions()}
+          </Text>
+          <Text style={styles.progressInfoText}>Total: {totalQuestions}</Text>
+        </View>
         <View style={styles.progressBarContainer}>
           <View
             style={[styles.progressBar, {width: `${calculateProgress()}%`}]}
@@ -165,6 +183,16 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'blue',
     borderRadius: 5,
+  },
+  progressInfoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  progressInfoText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: COLORS.black,
   },
 });
 
