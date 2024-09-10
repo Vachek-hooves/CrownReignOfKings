@@ -38,16 +38,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    width: '90%',
+    width: '100%',
     backgroundColor: COLORS.black + 90,
     borderRadius: 20,
-    padding: 20,
+    padding: 10,
     alignItems: 'center',
     elevation: 5,
   },
   crownImage: {
-    width: 250,
-    height: 250,
+    width: 350,
+    height: 350,
     marginBottom: 20,
   },
   title: {
