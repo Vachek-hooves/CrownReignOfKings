@@ -2,7 +2,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {CrownProvider} from './store/crown_store';
-import {Text} from 'react-native';
 import {MainScreen, WelcomeScreen, GameScreen} from './screen';
 import ProfileScreen from './screen/ProfileScreen';
 import {COLORS} from './constant/color';
