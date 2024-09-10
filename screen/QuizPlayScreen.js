@@ -1,27 +1,48 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+  ImageBackground,
+  Dimensions,
+} from 'react-native';
 import {MainImageLayout} from '../components/Layout';
 import {COLORS} from '../constant/color';
 import {useCrownQuiz} from '../store/crown_store';
 import {IconReturnSword} from '../components/icons';
 
+const {width, height} = Dimensions.get('window');
+const CARD_HEIGHT = height * 0.3;
+
 const QuizPlayScreen = ({navigation}) => {
   const {crownQuiz} = useCrownQuiz();
   console.log(crownQuiz);
 
-  const renderLevelCard = ({item}) => (
-    <TouchableOpacity
-      disabled={!item.isActive}
-      style={[styles.card, !item.isActive && styles.disabledCard]}
-      onPress={() =>
-        navigation.navigate('QuizQuestionScreen', {levelId: item.id})
-      }>
-      <Text style={styles.cardTitle}>{item.name}</Text>
-      <Text style={styles.cardSubtitle}>
-        {item.isActive ? 'Active' : 'Locked'}
-      </Text>
-    </TouchableOpacity>
-  );
+  const renderLevelCard = ({item}) => {
+    console.log(item);
+    return (
+      <TouchableOpacity
+        disabled={!item.isActive}
+        style={[styles.cardContainer, !item.isActive && styles.disabledCard]}
+        onPress={() =>
+          navigation.navigate('QuizQuestionScreen', {levelId: item.id})
+        }>
+        <ImageBackground
+          source={{uri: item.cardImage}}
+          style={styles.card}
+          imageStyle={styles.cardImage}>
+          <View style={styles.cardContent}>
+            <Text style={styles.cardTitle}>{item.name}</Text>
+            <Text style={styles.cardSubtitle}>
+              {item.isActive ? 'Active' : 'Locked'}
+            </Text>
+          </View>
+        </ImageBackground>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <MainImageLayout>
@@ -72,6 +93,27 @@ const styles = StyleSheet.create({
   cardSubtitle: {
     fontSize: 14,
     color: COLORS.beige + '80',
+  },
+  cardContainer: {
+    height: CARD_HEIGHT,
+    marginBottom: 15,
+  },
+  card: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  cardImage: {
+    borderRadius: 10,
+    height: 100,
+    width: 100,
+  },
+  cardContent: {
+    backgroundColor: COLORS.black + '90',
+    borderRadius: 10,
+    padding: 20,
+  },
+  disabledCard: {
+    opacity: 0.5,
   },
 });
 

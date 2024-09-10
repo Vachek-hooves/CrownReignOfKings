@@ -609,6 +609,24 @@ export const CROWN_DATA = [
   },
 ];
 
+export const QUIZ_CARD_IMAGE = [
+  {
+    id: 'war1',
+    cardImage: require('../assets/img/quizProfile/warOrPeace.jpg'),
+    image: require('../assets/img/quizProfile/king1.jpg'),
+  },
+  {
+    id: 'tax1',
+    cardImage: require('../assets/img/quizProfile/peasant.jpg'),
+    image: require('../assets/img/quizProfile/king2.jpg'),
+  },
+  {
+    id: 'royal',
+    cardImage: require('../assets/img/quizProfile/royalHeir.jpg'),
+    image: require('../assets/img/quizProfile/royalCrown.jpg'),
+  },
+];
+
 export const FACTS = [
   {
     id: 'fa1',
