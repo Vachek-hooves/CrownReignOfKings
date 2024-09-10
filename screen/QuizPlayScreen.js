@@ -12,6 +12,7 @@ import {MainImageLayout} from '../components/Layout';
 import {COLORS} from '../constant/color';
 import {useCrownQuiz} from '../store/crown_store';
 import {IconReturnSword} from '../components/icons';
+import {QUIZ_CARD_IMAGE} from '../data/crown_data';
 
 const {width, height} = Dimensions.get('window');
 const CARD_HEIGHT = height * 0.3;
@@ -21,6 +22,8 @@ const QuizPlayScreen = ({navigation}) => {
   console.log(crownQuiz);
 
   const renderLevelCard = ({item}) => {
+    const cardImageData = QUIZ_CARD_IMAGE.find(img => img.id === item.id);
+    const cardImage = cardImageData ? cardImageData.cardImage : null;
     console.log(item);
     return (
       <TouchableOpacity
@@ -30,7 +33,7 @@ const QuizPlayScreen = ({navigation}) => {
           navigation.navigate('QuizQuestionScreen', {levelId: item.id})
         }>
         <ImageBackground
-          source={{uri: item.cardImage}}
+          source={cardImage}
           style={styles.card}
           imageStyle={styles.cardImage}>
           <View style={styles.cardContent}>
@@ -53,8 +56,10 @@ const QuizPlayScreen = ({navigation}) => {
           renderItem={renderLevelCard}
           keyExtractor={item => item.id}
           contentContainerStyle={styles.listContainer}
+          showsVerticalScrollIndicator={false}
         />
       </View>
+      <View style={{height: 50}}></View>
       <IconReturnSword />
     </MainImageLayout>
   );
@@ -82,10 +87,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   disabledCard: {
-    opacity: 0.5,
+    opacity: 0.2,
   },
   cardTitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
     color: COLORS.beige,
     marginBottom: 5,
@@ -104,8 +109,8 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     borderRadius: 10,
-    height: 100,
-    width: 100,
+    height: '100%',
+    width: '100%',
   },
   cardContent: {
     backgroundColor: COLORS.black + '90',
