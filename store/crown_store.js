@@ -36,11 +36,23 @@ export const CrownProvider = ({children}) => {
       throw new Error('Reset Crown Quiz error', error);
     }
   };
-  const saveLevelScore = async (levelId, score) => {
+  const saveLevelScore = async (levelId, score, totalQuestions) => {
     try {
-      const updatedQuiz = crownQuiz.map(level =>
-        level.id === levelId ? {...level, levelScore: score.toString()} : level,
-      );
+      const updatedQuiz = crownQuiz.map((level, index) => {
+        if (level.id === levelId) {
+          const scorePercentage = (score / totalQuestions) * 100;
+          const updatedLevel = {...level, levelScore: score.toString()};
+          
+          // If score is more than 80% and there's a next level, set it to active
+          if (scorePercentage > 80 && index < crownQuiz.length - 1) {
+            crownQuiz[index + 1].isActive = true;
+          }
+          
+          return updatedLevel;
+        }
+        return level;
+      });
+      
       await saveCrownQuiz(updatedQuiz);
       setCrownQuiz(updatedQuiz);
     } catch (error) {

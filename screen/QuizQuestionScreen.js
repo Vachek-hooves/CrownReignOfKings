@@ -40,11 +40,18 @@ const QuizQuestionScreen = ({route,navigation}) => {
       setIsCorrect(null);
     } else {
       // Quiz finished
-      saveLevelScore(levelId, score);
+      saveLevelScore(levelId, score, totalQuestions);
+      const scorePercentage = (score / totalQuestions) * 100;
+      const message = scorePercentage > 80 
+        ? `Congratulations! You've unlocked the next level.`
+        : `You need to score over 80% to unlock the next level.`;
+      
       Alert.alert(
-        'Quiz Completed',
-        `Your score: ${score} out of ${totalQuestions}`,
-        [{text: 'OK', onPress: () => navigation.goBack()}],
+        "Quiz Completed",
+        `Your score: ${score} out of ${totalQuestions}\n${message}`,
+        [
+          { text: "OK", onPress: () => navigation.goBack() }
+        ]
       );
     }
   };
