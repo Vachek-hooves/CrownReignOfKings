@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+
 import {
   StyleSheet,
   Text,
@@ -17,6 +18,7 @@ const USER_KEY = '@user_data';
 const ProfileScreen = () => {
   const [name, setName] = useState('');
   const [image, setImage] = useState(null);
+  const [saveMessage, setSaveMessage] = useState('');
 
   useEffect(() => {
     loadUserData();
@@ -39,8 +41,11 @@ const ProfileScreen = () => {
     try {
       const userData = JSON.stringify({name, image});
       await AsyncStorage.setItem(USER_KEY, userData);
+      setSaveMessage('Profile updated successfully!');
+      setTimeout(() => setSaveMessage(''), 3000); // Clear message after 3 seconds
     } catch (error) {
       console.error('Error saving user data:', error);
+      setSaveMessage('Failed to update profile. Please try again.');
     }
   };
 
@@ -85,6 +90,9 @@ const ProfileScreen = () => {
         <TouchableOpacity style={styles.saveButton} onPress={saveUserData}>
           <Text style={styles.saveButtonText}>Save</Text>
         </TouchableOpacity>
+        {saveMessage ? (
+          <Text style={styles.saveMessage}>{saveMessage}</Text>
+        ) : null}
       </View>
     </MainImageLayout>
   );
@@ -128,6 +136,11 @@ const styles = StyleSheet.create({
   saveButtonText: {
     color: 'white',
     fontSize: 16,
+  },
+  saveMessage: {
+    marginTop: 10,
+    textAlign: 'center',
+    color: 'green',
   },
 });
 
