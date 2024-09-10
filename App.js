@@ -60,9 +60,9 @@ const TabNavigator = () => {
           
         // },
         title: '',
-        contentStyle: {
-          paddingBottom: 220,
-        },
+        // contentStyle: {
+        //   paddingBottom: 220,
+        // },
       }}>
       <Tab.Screen
         name="Main"
