@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
   Modal,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import {MainImageLayout} from '../components/Layout';
 import {ENCYCLOPEDIA} from '../data/crown_data';
+import {COLORS} from '../constant/color';
 
 const EncyclopediaCard = ({item, onPress}) => (
   <TouchableOpacity style={styles.card} onPress={() => onPress(item)}>
@@ -38,7 +40,9 @@ const MainScreen = () => {
           <EncyclopediaCard item={item} onPress={openModal} />
         )}
         keyExtractor={item => item.name}
-        contentContainerStyle={styles.listContainer}
+        // contentContainerStyle={styles.listContainer}
+        contentContainerStyle={[styles.listContainer, {paddingBottom: 90}]}
+        showsVerticalScrollIndicator={false}
       />
 
       <Modal
@@ -46,20 +50,27 @@ const MainScreen = () => {
         animationType="slide"
         transparent={true}
         onRequestClose={closeModal}>
-        <View style={styles.modalContainer}>
-          <ScrollView contentContainerStyle={styles.modalContent}>
-            {selectedItem && (
-              <>
-                <Image source={selectedItem.image} style={styles.modalImage} />
-                <Text style={styles.modalTitle}>{selectedItem.name}</Text>
-                <Text style={styles.modalStory}>{selectedItem.story}</Text>
-              </>
-            )}
-            <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
-              <Text style={styles.closeButtonText}>Close</Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </View>
+        <SafeAreaView style={{flex: 1}}>
+          <View style={styles.modalContainer}>
+            <ScrollView
+              contentContainerStyle={styles.modalContent}
+              showsVerticalScrollIndicator={false}>
+              {selectedItem && (
+                <>
+                  <Image
+                    source={selectedItem.image}
+                    style={styles.modalImage}
+                  />
+                  <Text style={styles.modalTitle}>{selectedItem.name}</Text>
+                  <Text style={styles.modalStory}>{selectedItem.story}</Text>
+                </>
+              )}
+              <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
+                <Text style={styles.closeButtonText}>Close</Text>
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
+        </SafeAreaView>
       </Modal>
     </MainImageLayout>
   );
@@ -72,7 +83,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.black,
     borderRadius: 10,
     marginBottom: 20,
     padding: 15,
@@ -93,19 +104,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: COLORS.white,
   },
   modalContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.black,
     borderRadius: 20,
     padding: 20,
-    width: '90%',
-    maxHeight: '80%',
+    // width: '90%',
+    // maxHeight: '80%',
   },
   modalImage: {
     width: '100%',
@@ -118,11 +130,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',
+    color: COLORS.beige,
   },
   modalStory: {
-    fontSize: 16,
+    fontSize: 17,
     lineHeight: 24,
     marginBottom: 20,
+    textAlign: 'center',
+    color: COLORS.white,
   },
   closeButton: {
     backgroundColor: '#007AFF',

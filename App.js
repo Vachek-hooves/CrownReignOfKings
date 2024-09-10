@@ -30,9 +30,10 @@ const TabNavigator = () => {
           borderRadius: 15,
           height: 90,
           backgroundColor: 'transparent',
-          // backgroundColor: COLORS.black,
+          backgroundColor: COLORS.black,
           marginTop: 20,
           paddingTop: 30,
+          marginTop:10,
           ...Platform.select({
             ios: {
               shadowColor: '#000',
@@ -59,9 +60,9 @@ const TabNavigator = () => {
           
         // },
         title: '',
-        // contentStyle: {
-        //   paddingBottom: 220,
-        // },
+        contentStyle: {
+          paddingBottom: 220,
+        },
       }}>
       <Tab.Screen
         name="Main"
