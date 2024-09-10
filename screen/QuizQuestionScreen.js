@@ -1,24 +1,36 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { MainImageLayout } from '../components/Layout';
-import { IconReturnSword } from '../components/icons';
-import { useCrownQuiz } from '../store/crown_store';
-import { COLORS } from '../constant/color';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+} from 'react-native';
+import {MainImageLayout} from '../components/Layout';
+import {IconReturnSword} from '../components/icons';
+import {useCrownQuiz} from '../store/crown_store';
+import {COLORS} from '../constant/color';
 
-const QuizQuestionScreen = ({ route }) => {
-  const { crownQuiz } = useCrownQuiz();
+const QuizQuestionScreen = ({route,navigation}) => {
+  const {crownQuiz, saveLevelScore} = useCrownQuiz();
   const levelId = route.params.levelId;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
+  const [score, setScore] = useState(0);
 
   const currentLevel = crownQuiz.find(level => level.id === levelId);
   const currentQuestion = currentLevel.questionsArray[currentQuestionIndex];
   const totalQuestions = currentLevel.questionsArray.length;
 
-  const handleOptionPress = (option) => {
+  const handleOptionPress = option => {
     setSelectedOption(option);
-    setIsCorrect(option === currentQuestion.correct);
+    const correct = option === currentQuestion.correct;
+    setIsCorrect(correct);
+    if (correct) {
+      setScore(prevScore => prevScore + 1);
+    }
   };
 
   const nextQuestion = () => {
@@ -28,8 +40,12 @@ const QuizQuestionScreen = ({ route }) => {
       setIsCorrect(null);
     } else {
       // Quiz finished
-      alert('Level completed!');
-      // Here you can add navigation back to the level selection screen
+      saveLevelScore(levelId, score);
+      Alert.alert(
+        'Quiz Completed',
+        `Your score: ${score} out of ${totalQuestions}`,
+        [{text: 'OK', onPress: () => navigation.goBack()}],
+      );
     }
   };
 
@@ -42,12 +58,14 @@ const QuizQuestionScreen = ({ route }) => {
       <ScrollView style={styles.container}>
         <View style={styles.progressInfoContainer}>
           <Text style={styles.progressInfoText}>
-            Remaining: {totalQuestions - currentQuestionIndex - 1}
+            Question: {currentQuestionIndex + 1} / {totalQuestions}
           </Text>
-          <Text style={styles.progressInfoText}>Total: {totalQuestions}</Text>
+          <Text style={styles.progressInfoText}>Score: {score}</Text>
         </View>
         <View style={styles.progressBarContainer}>
-          <View style={[styles.progressBar, { width: `${calculateProgress()}%` }]} />
+          <View
+            style={[styles.progressBar, {width: `${calculateProgress()}%`}]}
+          />
         </View>
         <View style={styles.questionContainer}>
           <Text style={styles.question}>{currentQuestion.question}</Text>
@@ -68,7 +86,9 @@ const QuizQuestionScreen = ({ route }) => {
         {selectedOption && (
           <TouchableOpacity style={styles.nextButton} onPress={nextQuestion}>
             <Text style={styles.nextButtonText}>
-              {currentQuestionIndex < totalQuestions - 1 ? 'Next Question' : 'Finish Quiz'}
+              {currentQuestionIndex < totalQuestions - 1
+                ? 'Next Question'
+                : 'Finish Quiz'}
             </Text>
           </TouchableOpacity>
         )}
@@ -139,7 +159,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     fontWeight: '500',
-    
   },
   nextButton: {
     backgroundColor: 'blue',

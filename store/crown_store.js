@@ -5,6 +5,7 @@ import {CROWN_DATA} from '../data/crown_data';
 export const CrownContext = createContext({
   crownQuiz: [],
   resetQuiz: () => {},
+  saveLevelScore: () => {},
 });
 
 export const CrownProvider = ({children}) => {
@@ -35,8 +36,19 @@ export const CrownProvider = ({children}) => {
       throw new Error('Reset Crown Quiz error', error);
     }
   };
+  const saveLevelScore = async (levelId, score) => {
+    try {
+      const updatedQuiz = crownQuiz.map(level =>
+        level.id === levelId ? {...level, levelScore: score.toString()} : level,
+      );
+      await saveCrownQuiz(updatedQuiz);
+      setCrownQuiz(updatedQuiz);
+    } catch (error) {
+      throw new Error('Save Level Score error', error);
+    }
+  };
 
-  const value = { crownQuiz, resetQuiz };
+  const value = {crownQuiz, resetQuiz, saveLevelScore};
   return (
     <CrownContext.Provider value={value}>{children}</CrownContext.Provider>
   );

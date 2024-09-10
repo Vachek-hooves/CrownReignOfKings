@@ -7,6 +7,7 @@ import {IconReturnSword} from '../components/icons';
 
 const QuizPlayScreen = ({navigation}) => {
   const {crownQuiz} = useCrownQuiz();
+  console.log(crownQuiz);
 
   const renderLevelCard = ({item}) => (
     <TouchableOpacity
