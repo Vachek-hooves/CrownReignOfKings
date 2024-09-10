@@ -3,11 +3,17 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {CrownProvider} from './store/crown_store';
 import {Text} from 'react-native';
-import {MainScreen, WelcomeScreen, GameScreen} from './screen';
+import {
+  MainScreen,
+  WelcomeScreen,
+  GameScreen,
+  CrownMuseumScreen,
+} from './screen';
 import ProfileScreen from './screen/ProfileScreen';
 import {COLORS} from './constant/color';
 import IconKingdom from './components/icons/IconKingdom';
 import {IconProfile, IconQuiz} from './components/icons';
+import IconTabCrown from './components/icons/IconTabCrown';
 
 const TabNavigator = () => {
   return (
@@ -64,6 +70,13 @@ const TabNavigator = () => {
         name="Game"
         component={GameScreen}
         options={{tabBarIcon: ({focused}) => <IconQuiz focused={focused} />}}
+      />
+      <Tab.Screen
+        name="CrownMuseumScreen"
+        component={CrownMuseumScreen}
+        options={{
+          tabBarIcon: ({focused}) => <IconTabCrown focused={focused} />,
+        }}
       />
     </Tab.Navigator>
   );

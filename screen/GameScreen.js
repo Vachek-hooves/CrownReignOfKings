@@ -1,9 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import {CROWN_DATA} from '../data/crown_data';
 import {MainImageLayout} from '../components/Layout';
 import {COLORS} from '../constant/color';
-// update
 
 const GameScreen = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -59,32 +64,36 @@ const GameScreen = () => {
 
   return (
     <MainImageLayout>
-      <View style={styles.progressBarContainer}>
-        <View
-          style={[styles.progressBar, {width: `${calculateProgress()}%`}]}
-        />
-      </View>
-      <View>
-        <Text style={styles.question}>{currentQuestion.question}</Text>
-        {currentQuestion.options.map((option, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[
-              styles.option,
-              selectedOption === option && isCorrect && styles.correctOption,
-              selectedOption === option && !isCorrect && styles.incorrectOption,
-            ]}
-            onPress={() => handleOptionPress(option)}
-            disabled={selectedOption !== null}>
-            <Text style={styles.optionText}>{option}</Text>
-          </TouchableOpacity>
-        ))}
-        {selectedOption && (
-          <TouchableOpacity style={styles.nextButton} onPress={nextQuestion}>
-            <Text style={styles.nextButtonText}>Next Question</Text>
-          </TouchableOpacity>
-        )}
-      </View>
+      <ScrollView>
+        <View style={styles.progressBarContainer}>
+          <View
+            style={[styles.progressBar, {width: `${calculateProgress()}%`}]}
+          />
+        </View>
+        <View>
+          <Text style={styles.question}>{currentQuestion.question}</Text>
+          {currentQuestion.options.map((option, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.option,
+                selectedOption === option && isCorrect && styles.correctOption,
+                selectedOption === option &&
+                  !isCorrect &&
+                  styles.incorrectOption,
+              ]}
+              onPress={() => handleOptionPress(option)}
+              disabled={selectedOption !== null}>
+              <Text style={styles.optionText}>{option}</Text>
+            </TouchableOpacity>
+          ))}
+          {selectedOption && (
+            <TouchableOpacity style={styles.nextButton} onPress={nextQuestion}>
+              <Text style={styles.nextButtonText}>Next Question</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </ScrollView>
     </MainImageLayout>
   );
 };
@@ -105,7 +114,7 @@ const styles = StyleSheet.create({
     padding: 5,
     marginBottom: 10,
     borderRadius: 5,
-    height: 80,
+    height: 70,
     justifyContent: 'center',
   },
   correctOption: {

@@ -665,3 +665,54 @@ export const ENCYCLOPEDIA = [
     image: require('../assets/img/encyclopedia/fredy.png'),
   },
 ];
+
+export const MUSEUM = [
+  {
+    crown: 'Crown of Charlemagne',
+    about:
+      "A famous symbol of Charlemagne's rule, representing the unity of the Carolingian Empire and the Holy Roman Empire.",
+    image: require('../assets/img/museum/Charlemagne.png'),
+  },
+  {
+    crown: "St. Edward's Crown",
+    about:
+      'The traditional English crown used in the coronation of monarchs. It is named after Edward the Confessor and is a key symbol of the British monarchy.',
+    image: require('../assets/img/museum/edward.png'),
+  },
+  {
+    crown: 'Crown of Louis XIV',
+    about:
+      "The crown worn by Louis XIV of France, representing the grandeur and absolute power of the French monarchy during the Sun King's reign.",
+    image: require('../assets/img/museum/lois.png'),
+  },
+  {
+    crown: 'Crown of Frederick the Great',
+    about:
+      'The crown was used by Frederick II of Prussia, symbolizing his military and administrative reforms that transformed Prussia into a major European power.',
+    image: require('../assets/img/museum/Frederick.png'),
+  },
+  {
+    crown: 'Crown of Elizabeth I',
+    about:
+      'The crown worn by Queen Elizabeth I of England, reflecting the stability and cultural renaissance of her reign during the Elizabethan Era.',
+    image: require('../assets/img/museum/elizabeth.png'),
+  },
+  {
+    crown: 'Crown of the Holy Roman Empire',
+    about:
+      'Also known as the Imperial Crown of the Holy Roman Empire, it was used for the coronation of Holy Roman Emperors and symbolizes the unity of the empire.',
+    image: require('../assets/img/museum/roman.png'),
+  },
+  {
+    crown: 'Crown of the Byzantine Empire',
+    about:
+      'A richly decorated crown used by Byzantine emperors, symbolizing the authority and divine right of the Byzantine rulers.',
+    image: require('../assets/img/museum/Byzantine.png'),
+  },
+  {
+    crown: 'Crown of the Kingdom of Scotland',
+    about:
+      'The crown used by Spanish monarchs, reflecting the long history and various dynastic changes in Spain.',
+    image: require('../assets/img/museum/spain.png'),
+  },
+];
