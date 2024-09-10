@@ -1,5 +1,7 @@
 export const CROWN_DATA = [
   {
+    cardImage: require('../assets/img/quizProfile/warOrPeace.jpg'),
+    image: require('../assets/img/quizProfile/king1.jpg'),
     levelScore: '0',
     id: 'war1',
     name: 'War or Peace',
@@ -227,6 +229,8 @@ export const CROWN_DATA = [
     ],
   },
   {
+    cardImage: require('../assets/img/quizProfile/peasant.jpg'),
+    image: require('../assets/img/quizProfile/king2.jpg'),
     levelScore: '0',
     id: 'tax1',
     name: 'Peasant Rebellion',
@@ -455,6 +459,8 @@ export const CROWN_DATA = [
     ],
   },
   {
+    cardImage: require('../assets/img/quizProfile/royalHeir.jpg'),
+    image: require('../assets/img/quizProfile/royalCrown.jpg'),
     levelScore: '0',
     id: 'royal',
     name: 'The Royal Heir',
