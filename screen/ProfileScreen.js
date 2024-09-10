@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,17 +6,20 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {launchImageLibrary} from 'react-native-image-picker';
 import {MainImageLayout} from '../components/Layout';
+import ImagePicker from '../components/ui/ImagePicker';
+import {COLORS} from '../constant/color';
 
 const USER_KEY = '@user_data';
 
 const ProfileScreen = () => {
   const [name, setName] = useState('');
   const [image, setImage] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [saveMessage, setSaveMessage] = useState('');
+  // console.log(image);
 
   useEffect(() => {
     loadUserData();
@@ -28,7 +31,17 @@ const ProfileScreen = () => {
       if (userData) {
         const {name, image} = JSON.parse(userData);
         setName(name);
-        setImage(image);
+
+        if (
+          image &&
+          (image.startsWith('file://') || image.startsWith('http'))
+        ) {
+          setImage(image);
+        } else {
+          setImage(null);
+        }
+      } else {
+        setIsEditing(true); // If no user data, go straight to editing mode
       }
     } catch (error) {
       console.error('Error loading user data:', error);
@@ -39,35 +52,26 @@ const ProfileScreen = () => {
     try {
       const userData = JSON.stringify({name, image});
       await AsyncStorage.setItem(USER_KEY, userData);
+      setSaveMessage('Profile updated successfully!');
+      setIsEditing(false);
+      setTimeout(() => setSaveMessage(''), 3000);
     } catch (error) {
       console.error('Error saving user data:', error);
+      setSaveMessage('Failed to update profile. Please try again.');
     }
   };
 
-  const pickImage = () => {
-    const options = {
-      mediaType: 'photo',
-      includeBase64: false,
-      maxHeight: 200,
-      maxWidth: 200,
-    };
-
-    launchImageLibrary(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else {
-        const source = {uri: response.assets[0].uri};
-        setImage(source.uri);
-      }
-    });
+  const handleImage = images => {
+    if (images && images.length > 0) {
+      // setImage(images[0]);
+      setImage(images[0].uri || images[0]);
+    }
   };
 
   return (
     <MainImageLayout>
-      <View style={{marginHorizontal: 30}}>
-        <TouchableOpacity onPress={pickImage}>
+      <View style={styles.container}>
+        <ImagePicker handleImage={handleImage} btnStyle={styles.imagePicker}>
           {image ? (
             <Image source={{uri: image}} style={styles.profileImage} />
           ) : (
@@ -75,16 +79,34 @@ const ProfileScreen = () => {
               <Text>Tap to add image</Text>
             </View>
           )}
-        </TouchableOpacity>
-        <TextInput
-          style={styles.input}
-          onChangeText={setName}
-          value={name}
-          placeholder="Enter your name"
-        />
-        <TouchableOpacity style={styles.saveButton} onPress={saveUserData}>
-          <Text style={styles.saveButtonText}>Save</Text>
-        </TouchableOpacity>
+        </ImagePicker>
+
+        {isEditing ? (
+          <TextInput
+            style={styles.input}
+            onChangeText={setName}
+            value={name}
+            placeholder="Enter your name"
+          />
+        ) : (
+          <Text style={styles.nameText}>{name}</Text>
+        )}
+
+        {isEditing ? (
+          <TouchableOpacity style={styles.saveButton} onPress={saveUserData}>
+            <Text style={styles.buttonText}>Save</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.editButton}
+            onPress={() => setIsEditing(true)}>
+            <Text style={styles.buttonText}>Edit Profile</Text>
+          </TouchableOpacity>
+        )}
+
+        {saveMessage ? (
+          <Text style={styles.saveMessage}>{saveMessage}</Text>
+        ) : null}
       </View>
     </MainImageLayout>
   );
@@ -92,42 +114,66 @@ const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
   },
   profileImage: {
-    width: 150,
-    height: 150,
+    width: '100%',
+    height: '100%',
     borderRadius: 75,
-    marginBottom: 20,
   },
   placeholderImage: {
-    width: 150,
-    height: 150,
+    width: 250,
+    height: 250,
     borderRadius: 75,
     backgroundColor: '#e1e1e1',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  imagePicker: {
     marginBottom: 20,
   },
   input: {
     width: '100%',
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    borderColor: COLORS.black,
+    borderWidth: 2,
     marginBottom: 20,
     paddingHorizontal: 10,
+    fontSize: 20,
+    color: COLORS.white,
+    fontWeight: '700',
+  },
+  nameText: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: COLORS.beige,
+    letterSpacing: 3,
   },
   saveButton: {
-    backgroundColor: 'blue',
+    backgroundColor: COLORS.beige,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    paddingVertical: 10,
+  },
+  editButton: {
+    backgroundColor: COLORS.gold,
     padding: 10,
     borderRadius: 5,
   },
-  saveButtonText: {
-    color: 'white',
-    fontSize: 16,
+  buttonText: {
+    color: COLORS.black,
+    fontSize: 20,
+    fontWeight: '600',
+    letterSpacing: 2,
+  },
+  saveMessage: {
+    marginTop: 10,
+    textAlign: 'center',
+    color: 'green',
   },
 });
 

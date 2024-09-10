@@ -1,11 +1,11 @@
 import {Image, View} from 'react-native';
 import {COLORS} from '../../constant/color';
 
-const IconKingdom = ({focused}) => {
+const IconTabCrown = ({focused}) => {
   return (
     <>
       <Image
-        source={require('../../assets/icons/encyclopedia.png')}
+        source={require('../../assets/icons/crownColored.png')}
         style={{width: 55, height: 55}}
       />
       <View
@@ -19,4 +19,6 @@ const IconKingdom = ({focused}) => {
   );
 };
 
-export default IconKingdom;
+export default IconTabCrown;
+
+

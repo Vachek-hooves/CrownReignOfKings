@@ -2,11 +2,18 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {CrownProvider} from './store/crown_store';
-import {MainScreen, WelcomeScreen, GameScreen} from './screen';
+import {Text} from 'react-native';
+import {
+  MainScreen,
+  WelcomeScreen,
+  GameScreen,
+  CrownMuseumScreen,
+} from './screen';
 import ProfileScreen from './screen/ProfileScreen';
 import {COLORS} from './constant/color';
 import IconKingdom from './components/icons/IconKingdom';
 import {IconProfile, IconQuiz} from './components/icons';
+import IconTabCrown from './components/icons/IconTabCrown';
 
 const TabNavigator = () => {
   return (
@@ -23,6 +30,10 @@ const TabNavigator = () => {
           borderRadius: 15,
           height: 90,
           backgroundColor: 'transparent',
+          backgroundColor: COLORS.black,
+          marginTop: 20,
+          paddingTop: 30,
+          marginTop:10,
           ...Platform.select({
             ios: {
               shadowColor: '#000',
@@ -44,10 +55,14 @@ const TabNavigator = () => {
           fontSize: 12,
           fontWeight: 'bold',
         },
-        tabBarItemStyle: {
-          paddingVertical: 5,
-        },
+        // tabBarItemStyle: {
+        //   // paddingVertical: 5,
+          
+        // },
         title: '',
+        // contentStyle: {
+        //   paddingBottom: 220,
+        // },
       }}>
       <Tab.Screen
         name="Main"
@@ -63,6 +78,13 @@ const TabNavigator = () => {
         name="Game"
         component={GameScreen}
         options={{tabBarIcon: ({focused}) => <IconQuiz focused={focused} />}}
+      />
+      <Tab.Screen
+        name="CrownMuseumScreen"
+        component={CrownMuseumScreen}
+        options={{
+          tabBarIcon: ({focused}) => <IconTabCrown focused={focused} />,
+        }}
       />
     </Tab.Navigator>
   );
