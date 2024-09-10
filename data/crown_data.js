@@ -232,7 +232,7 @@ export const CROWN_DATA = [
     name: 'Peasant Rebellion',
     about:
       'Due to increased taxes to fund the army, peasants are beginning to revolt. You face demands for change or the situation will escalate.',
-    isActive: true,
+    isActive: false,
     questionsArray: [
       {
         id: 'tax1',
@@ -460,7 +460,7 @@ export const CROWN_DATA = [
     name: 'The Royal Heir',
     about:
       'You must choose your successor. Your children have different abilities and ambitions: one is a military leader, another is a diplomat and strategist. The choice of heir will have a decisive impact on the future of the kingdom.',
-    isActive: true,
+    isActive: false,
     questionsArray: [
       {
         id: 'succession1',
