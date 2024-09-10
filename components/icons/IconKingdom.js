@@ -5,7 +5,7 @@ const IconKingdom = ({focused}) => {
   return (
     <>
       <Image
-        source={require('../../assets/icons/castle.png')}
+        source={require('../../assets/icons/encyclopedia.png')}
         style={{width: 55, height: 55}}
       />
       <View
