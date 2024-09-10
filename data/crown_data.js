@@ -1,5 +1,6 @@
 export const CROWN_DATA = [
   {
+    levelScore: '0',
     id: 'war1',
     name: 'War or Peace',
     isActive: true,
@@ -226,6 +227,7 @@ export const CROWN_DATA = [
     ],
   },
   {
+    levelScore: '0',
     id: 'tax1',
     name: 'Peasant Rebellion',
     about:
@@ -453,6 +455,7 @@ export const CROWN_DATA = [
     ],
   },
   {
+    levelScore: '0',
     id: 'royal',
     name: 'The Royal Heir',
     about:
