@@ -6,11 +6,13 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import {CROWN_DATA} from '../data/crown_data';
+// import {CROWN_DATA} from '../data/crown_data';
 import {MainImageLayout} from '../components/Layout';
 import {COLORS} from '../constant/color';
+import {useCrownQuiz} from '../store/crown_store';
 
 const GameScreen = () => {
+  const {crownQuiz} = useCrownQuiz();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentCategory, setCurrentCategory] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -19,7 +21,7 @@ const GameScreen = () => {
 
   useEffect(() => {
     // Calculate total number of questions across all categories
-    const total = CROWN_DATA.reduce(
+    const total = crownQuiz.reduce(
       (sum, category) => sum + category.questionsArray.length,
       0,
     );
@@ -27,14 +29,13 @@ const GameScreen = () => {
   }, []);
 
   const currentQuestion =
-    CROWN_DATA[currentCategory].questionsArray[currentQuestionIndex];
+    crownQuiz[currentCategory].questionsArray[currentQuestionIndex];
 
   const calculateProgress = () => {
     const questionsSoFar =
-      CROWN_DATA.slice(0, currentCategory).reduce(
-        (sum, category) => sum + category.questionsArray.length,
-        0,
-      ) +
+      crownQuiz
+        .slice(0, currentCategory)
+        .reduce((sum, category) => sum + category.questionsArray.length, 0) +
       currentQuestionIndex +
       1;
     return (questionsSoFar / totalQuestions) * 100;
@@ -48,10 +49,10 @@ const GameScreen = () => {
   const nextQuestion = () => {
     if (
       currentQuestionIndex <
-      CROWN_DATA[currentCategory].questionsArray.length - 1
+      crownQuiz[currentCategory].questionsArray.length - 1
     ) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else if (currentCategory < CROWN_DATA.length - 1) {
+    } else if (currentCategory < crownQuiz.length - 1) {
       setCurrentCategory(currentCategory + 1);
       setCurrentQuestionIndex(0);
     } else {
@@ -71,7 +72,9 @@ const GameScreen = () => {
           />
         </View>
         <View>
-          <Text style={styles.question}>{currentQuestion.question}</Text>
+          <View style={styles.questionContainer}>
+            <Text style={styles.question}>{currentQuestion.question}</Text>
+          </View>
           {currentQuestion.options.map((option, index) => (
             <TouchableOpacity
               key={index}
@@ -104,10 +107,21 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
   },
+  questionContainer: {
+    backgroundColor: COLORS.black,
+    marginVertical: 5,
+    borderRadius: 8,
+    padding: 5,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   question: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 20,
+    textAlign: 'center',
+    color: COLORS.white,
   },
   option: {
     backgroundColor: COLORS.beige,
