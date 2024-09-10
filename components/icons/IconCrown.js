@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import { Image} from 'react-native';
 import {COLORS} from '../../constant/color';
 
 const IconCrown = () => {
@@ -18,4 +18,4 @@ const IconCrown = () => {
 
 export default IconCrown;
 
-const styles = StyleSheet.create({});
+

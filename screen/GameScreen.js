@@ -11,22 +11,19 @@ import {MainImageLayout} from '../components/Layout';
 import {COLORS} from '../constant/color';
 import {useCrownQuiz} from '../store/crown_store';
 
-const GameScreen = () => {
- 
-
-
-  
-
+const GameScreen = ({navigation}) => {
+  function navigateQuizPlay() {
+    navigation.navigate('QuizPlayScreen');
+  }
   return (
     <MainImageLayout>
-      
+      <TouchableOpacity onPress={navigateQuizPlay}>
+        <Text>Open Quiz</Text>
+      </TouchableOpacity>
     </MainImageLayout>
   );
 };
 
-const styles = StyleSheet.create({
- 
-  
-});
+const styles = StyleSheet.create({});
 
 export default GameScreen;

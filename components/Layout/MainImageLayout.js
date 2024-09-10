@@ -18,7 +18,7 @@ const MainImageLayout = ({children, style}) => {
           ...StyleSheet.absoluteFillObject,
           backgroundColor: COLORS.blue + 90,
         }}></View>
-      <SafeAreaView>{children}</SafeAreaView>
+      <SafeAreaView style={{flex: 1}}>{children}</SafeAreaView>
     </ImageBackground>
   );
 };
