@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Modal } from 'react-native';
-import { MUSEUM } from '../data/crown_data';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  Modal,
+} from 'react-native';
+import {MUSEUM} from '../data/crown_data';
+import {MainImageLayout} from '../components/Layout';
+import {COLORS} from '../constant/color';
 
-const CrownCard = ({ item, onPress }) => (
+const CrownCard = ({item, onPress}) => (
   <TouchableOpacity style={styles.card} onPress={onPress}>
     <Image source={item.image} style={styles.cardImage} />
     <Text style={styles.cardTitle}>{item.crown}</Text>
   </TouchableOpacity>
 );
 
-const CrownModal = ({ item, visible, onClose }) => (
+const CrownModal = ({item, visible, onClose}) => (
   <Modal visible={visible} transparent animationType="fade">
     <View style={styles.modalContainer}>
       <View style={styles.modalContent}>
@@ -27,7 +37,7 @@ const CrownModal = ({ item, visible, onClose }) => (
 const CrownMuseumScreen = () => {
   const [selectedCrown, setSelectedCrown] = useState(null);
 
-  const openModal = (item) => {
+  const openModal = item => {
     setSelectedCrown(item);
   };
 
@@ -36,31 +46,33 @@ const CrownMuseumScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={MUSEUM}
-        renderItem={({ item }) => (
-          <CrownCard item={item} onPress={() => openModal(item)} />
-        )}
-        keyExtractor={(item) => item.crown}
-        numColumns={2}
-        contentContainerStyle={styles.listContainer}
-      />
-      {selectedCrown && (
-        <CrownModal
-          item={selectedCrown}
-          visible={!!selectedCrown}
-          onClose={closeModal}
+    <MainImageLayout>
+      <View style={styles.container}>
+        <FlatList
+          data={MUSEUM}
+          renderItem={({item}) => (
+            <CrownCard item={item} onPress={() => openModal(item)} />
+          )}
+          keyExtractor={item => item.crown}
+          numColumns={2}
+          contentContainerStyle={styles.listContainer}
         />
-      )}
-    </View>
+        {selectedCrown && (
+          <CrownModal
+            item={selectedCrown}
+            visible={!!selectedCrown}
+            onClose={closeModal}
+          />
+        )}
+      </View>
+    </MainImageLayout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#f0f0f0',
+    // flex: 1,
+    // backgroundColor: '#f0f0f0',
   },
   listContainer: {
     padding: 10,
@@ -68,13 +80,13 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 5,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.beige,
     borderRadius: 10,
     padding: 10,
     alignItems: 'center',
     elevation: 3,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 2,
   },
@@ -96,13 +108,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.black,
     borderRadius: 20,
     padding: 20,
     alignItems: 'center',
     elevation: 5,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     shadowRadius: 4,
   },
@@ -115,11 +127,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginVertical: 10,
+    color: COLORS.white,
   },
   modalAbout: {
     fontSize: 16,
     textAlign: 'center',
     marginBottom: 20,
+    color: COLORS.white,
   },
   closeButton: {
     backgroundColor: '#007AFF',
@@ -135,4 +149,3 @@ const styles = StyleSheet.create({
 });
 
 export default CrownMuseumScreen;
-
