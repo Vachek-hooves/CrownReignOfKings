@@ -16,7 +16,7 @@ import {COLORS} from '../constant/color';
 
 const EncyclopediaCard = ({item, onPress}) => (
   <TouchableOpacity style={styles.card} onPress={() => onPress(item)}>
-    <Image source={item.image} style={styles.cardImage} />
+    <Image source={item.image} style={styles.cardImage} resizeMode="cont" />
     <Text style={styles.cardTitle}>{item.name}</Text>
   </TouchableOpacity>
 );
@@ -60,6 +60,7 @@ const MainScreen = () => {
                   <Image
                     source={selectedItem.image}
                     style={styles.modalImage}
+                    resizeMode="contain"
                   />
                   <Text style={styles.modalTitle}>{selectedItem.name}</Text>
                   <Text style={styles.modalStory}>{selectedItem.story}</Text>
@@ -95,13 +96,14 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   cardImage: {
-    width: '100%',
-    height: 200,
+    width: '65%',
+    height: 210,
     borderRadius: 10,
     marginBottom: 10,
+    overflow: 'hidden',
   },
   cardTitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
     color: COLORS.white,
