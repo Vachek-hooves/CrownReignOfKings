@@ -1,4 +1,3 @@
-
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
@@ -31,6 +30,7 @@ const TabNavigator = () => {
           borderRadius: 15,
           height: 90,
           backgroundColor: 'transparent',
+          // backgroundColor: COLORS.black,
           marginTop: 20,
           paddingTop: 30,
           ...Platform.select({
@@ -54,13 +54,14 @@ const TabNavigator = () => {
           fontSize: 12,
           fontWeight: 'bold',
         },
-        tabBarItemStyle: {
-          paddingVertical: 5,
-        },
+        // tabBarItemStyle: {
+        //   // paddingVertical: 5,
+          
+        // },
         title: '',
-        contentStyle: {
-          paddingBottom: 220,
-        },
+        // contentStyle: {
+        //   paddingBottom: 220,
+        // },
       }}>
       <Tab.Screen
         name="Main"
