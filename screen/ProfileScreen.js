@@ -32,6 +32,7 @@ const ProfileScreen = () => {
         const {name, image} = JSON.parse(userData);
         setName(name);
 
+
         if (
           image &&
           (image.startsWith('file://') || image.startsWith('http'))
@@ -40,6 +41,7 @@ const ProfileScreen = () => {
         } else {
           setImage(null);
         }
+
       } else {
         setIsEditing(true); // If no user data, go straight to editing mode
       }
@@ -63,8 +65,11 @@ const ProfileScreen = () => {
 
   const handleImage = images => {
     if (images && images.length > 0) {
-      // setImage(images[0]);
+
+      // Ensure we're saving the full URI of the image
       setImage(images[0].uri || images[0]);
+
+
     }
   };
 
