@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react';
-
 import {
   StyleSheet,
   Text,
@@ -7,11 +6,10 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {launchImageLibrary} from 'react-native-image-picker';
 import {MainImageLayout} from '../components/Layout';
+import ImagePicker from '../components/ui/ImagePicker';
 
 const USER_KEY = '@user_data';
 
@@ -42,37 +40,23 @@ const ProfileScreen = () => {
       const userData = JSON.stringify({name, image});
       await AsyncStorage.setItem(USER_KEY, userData);
       setSaveMessage('Profile updated successfully!');
-      setTimeout(() => setSaveMessage(''), 3000); // Clear message after 3 seconds
+      setTimeout(() => setSaveMessage(''), 3000);
     } catch (error) {
       console.error('Error saving user data:', error);
       setSaveMessage('Failed to update profile. Please try again.');
     }
   };
 
-  const pickImage = () => {
-    const options = {
-      mediaType: 'photo',
-      includeBase64: false,
-      maxHeight: 200,
-      maxWidth: 200,
-    };
-
-    launchImageLibrary(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.assets && response.assets.length > 0) {
-        const source = {uri: response.assets[0].uri};
-        setImage(source.uri);
-      }
-    });
+  const handleImage = (images) => {
+    if (images && images.length > 0) {
+      setImage(images[0]);
+    }
   };
 
   return (
     <MainImageLayout>
       <View style={{marginHorizontal: 30}}>
-        <TouchableOpacity onPress={pickImage}>
+        <ImagePicker handleImage={handleImage} btnStyle={styles.imagePicker}>
           {image ? (
             <Image source={{uri: image}} style={styles.profileImage} />
           ) : (
@@ -80,7 +64,7 @@ const ProfileScreen = () => {
               <Text>Tap to add image</Text>
             </View>
           )}
-        </TouchableOpacity>
+        </ImagePicker>
         <TextInput
           style={styles.input}
           onChangeText={setName}
@@ -150,6 +134,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  imagePicker: {
+    alignItems: 'center',
+    marginBottom: 20,
   },
 });
 
