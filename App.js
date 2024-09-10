@@ -8,6 +8,7 @@ import {
   WelcomeScreen,
   GameScreen,
   CrownMuseumScreen,
+  QuizQuestionScreen,
 } from './screen';
 import ProfileScreen from './screen/ProfileScreen';
 import {COLORS} from './constant/color';
@@ -107,6 +108,10 @@ function App() {
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
           <Stack.Screen name="QuizPlayScreen" component={QuizPlayScreen} />
+          <Stack.Screen
+            name="QuizQuestionScreen"
+            component={QuizQuestionScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </CrownProvider>

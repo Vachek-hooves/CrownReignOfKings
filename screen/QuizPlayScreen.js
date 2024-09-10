@@ -10,7 +10,8 @@ const QuizPlayScreen = ({navigation}) => {
 
   const renderLevelCard = ({item}) => (
     <TouchableOpacity
-      style={styles.card}
+      disabled={!item.isActive}
+      style={[styles.card, !item.isActive && styles.disabledCard]}
       onPress={() =>
         navigation.navigate('QuizQuestionScreen', {levelId: item.id})
       }>
@@ -57,6 +58,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
     marginBottom: 15,
+  },
+  disabledCard: {
+    opacity: 0.5,
   },
   cardTitle: {
     fontSize: 18,

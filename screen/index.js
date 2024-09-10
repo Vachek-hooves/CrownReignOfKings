@@ -3,6 +3,7 @@ import MainScreen from './MainScreen';
 import ProfileScreen from './ProfileScreen';
 import GameScreen from './GameScreen';
 import CrownMuseumScreen from './CrownMuseumScreen';
+import QuizQuestionScreen from './QuizQuestionScreen';
 
 export {
   WelcomeScreen,
@@ -10,4 +11,5 @@ export {
   ProfileScreen,
   GameScreen,
   CrownMuseumScreen,
+  QuizQuestionScreen,
 };
