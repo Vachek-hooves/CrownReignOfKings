@@ -3,13 +3,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {CrownProvider} from './store/crown_store';
 import {Text} from 'react-native';
-import {MainScreen, WelcomeScreen,GameScreen} from './screen';
+import {MainScreen, WelcomeScreen, GameScreen} from './screen';
 import ProfileScreen from './screen/ProfileScreen';
-import { COLORS } from './constant/color';
+import {COLORS} from './constant/color';
+import IconKingdom from './components/icons/IconKingdom';
+import {IconProfile, IconQuiz} from './components/icons';
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator 
+    <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
@@ -21,6 +23,7 @@ const TabNavigator = () => {
           backgroundColor: COLORS.beige,
           borderRadius: 15,
           height: 90,
+          backgroundColor: 'transparent',
           ...Platform.select({
             ios: {
               shadowColor: '#000',
@@ -45,19 +48,29 @@ const TabNavigator = () => {
         tabBarItemStyle: {
           paddingVertical: 5,
         },
-      }}
-    >
-      <Tab.Screen name="Main" component={MainScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Game" component={GameScreen} />
+        title: '',
+      }}>
+      <Tab.Screen
+        name="Main"
+        component={MainScreen}
+        options={{tabBarIcon: ({focused}) => <IconKingdom focused={focused} />}}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{tabBarIcon: ({focused}) => <IconProfile focused={focused} />}}
+      />
+      <Tab.Screen
+        name="Game"
+        component={GameScreen}
+        options={{tabBarIcon: ({focused}) => <IconQuiz focused={focused} />}}
+      />
     </Tab.Navigator>
   );
 };
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
-
 
 function App() {
   return (
