@@ -31,7 +31,7 @@ const ProfileScreen = () => {
       if (userData) {
         const {name, image} = JSON.parse(userData);
         setName(name);
-        console.log(image);
+
         if (
           image &&
           (image.startsWith('file://') || image.startsWith('http'))
