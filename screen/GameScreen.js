@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {CROWN_DATA} from '../data/crown_data';
 import {MainImageLayout} from '../components/Layout';
+import {COLORS} from '../constant/color';
 // update
 
 const GameScreen = () => {
@@ -13,7 +14,10 @@ const GameScreen = () => {
 
   useEffect(() => {
     // Calculate total number of questions across all categories
-    const total = CROWN_DATA.reduce((sum, category) => sum + category.questionsArray.length, 0);
+    const total = CROWN_DATA.reduce(
+      (sum, category) => sum + category.questionsArray.length,
+      0,
+    );
     setTotalQuestions(total);
   }, []);
 
@@ -21,10 +25,13 @@ const GameScreen = () => {
     CROWN_DATA[currentCategory].questionsArray[currentQuestionIndex];
 
   const calculateProgress = () => {
-    const questionsSoFar = CROWN_DATA.slice(0, currentCategory).reduce(
-      (sum, category) => sum + category.questionsArray.length,
-      0
-    ) + currentQuestionIndex + 1;
+    const questionsSoFar =
+      CROWN_DATA.slice(0, currentCategory).reduce(
+        (sum, category) => sum + category.questionsArray.length,
+        0,
+      ) +
+      currentQuestionIndex +
+      1;
     return (questionsSoFar / totalQuestions) * 100;
   };
 
@@ -53,7 +60,9 @@ const GameScreen = () => {
   return (
     <MainImageLayout>
       <View style={styles.progressBarContainer}>
-        <View style={[styles.progressBar, {width: `${calculateProgress()}%`}]} />
+        <View
+          style={[styles.progressBar, {width: `${calculateProgress()}%`}]}
+        />
       </View>
       <View>
         <Text style={styles.question}>{currentQuestion.question}</Text>
@@ -92,10 +101,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   option: {
-    backgroundColor: '#f0f0f0',
-    padding: 15,
+    backgroundColor: COLORS.beige,
+    padding: 5,
     marginBottom: 10,
     borderRadius: 5,
+    height: 80,
+    justifyContent: 'center',
   },
   correctOption: {
     backgroundColor: 'green',
@@ -104,7 +115,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
   optionText: {
-    fontSize: 16,
+    fontSize: 18,
+    textAlign: 'center',
+    fontWeight: '500',
   },
   nextButton: {
     backgroundColor: 'blue',
