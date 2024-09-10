@@ -62,7 +62,7 @@ const ProfileScreen = () => {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
-      } else {
+      } else if (response.assets && response.assets.length > 0) {
         const source = {uri: response.assets[0].uri};
         setImage(source.uri);
       }
@@ -93,6 +93,9 @@ const ProfileScreen = () => {
         {saveMessage ? (
           <Text style={styles.saveMessage}>{saveMessage}</Text>
         ) : null}
+        {name && (
+          <Text style={styles.displayName}>Current name: {name}</Text>
+        )}
       </View>
     </MainImageLayout>
   );
@@ -141,6 +144,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
     color: 'green',
+  },
+  displayName: {
+    marginTop: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
