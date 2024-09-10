@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
     borderRadius: 75,
   },
   placeholderImage: {
-    width: 150,
-    height: 150,
+    width: 250,
+    height: 250,
     borderRadius: 75,
     backgroundColor: '#e1e1e1',
     justifyContent: 'center',

@@ -16,7 +16,7 @@ import {COLORS} from '../constant/color';
 
 const EncyclopediaCard = ({item, onPress}) => (
   <TouchableOpacity style={styles.card} onPress={() => onPress(item)}>
-    <Image source={item.image} style={styles.cardImage} resizeMode="cont" />
+    <Image source={item.image} style={styles.cardImage}  />
     <Text style={styles.cardTitle}>{item.name}</Text>
   </TouchableOpacity>
 );

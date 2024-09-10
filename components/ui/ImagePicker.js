@@ -38,8 +38,8 @@ const ImagePicker = ({handleImage, children, btnStyle}) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 150,
-    height: 150,
+    width: 250,
+    height: 250,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 80,
