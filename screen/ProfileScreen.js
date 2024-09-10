@@ -19,6 +19,7 @@ const ProfileScreen = () => {
   const [image, setImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
+  // console.log(image);
 
   useEffect(() => {
     loadUserData();
@@ -30,7 +31,15 @@ const ProfileScreen = () => {
       if (userData) {
         const {name, image} = JSON.parse(userData);
         setName(name);
-        setImage(image);
+        console.log(image);
+        if (
+          image &&
+          (image.startsWith('file://') || image.startsWith('http'))
+        ) {
+          setImage(image);
+        } else {
+          setImage(null);
+        }
       } else {
         setIsEditing(true); // If no user data, go straight to editing mode
       }
@@ -54,7 +63,8 @@ const ProfileScreen = () => {
 
   const handleImage = images => {
     if (images && images.length > 0) {
-      setImage(images[0]);
+      // setImage(images[0]);
+      setImage(images[0].uri || images[0]);
     }
   };
 
@@ -137,9 +147,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   nameText: {
-    fontSize: 26,
+    fontSize: 36,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: COLORS.beige,
+    letterSpacing: 3,
   },
   saveButton: {
     backgroundColor: COLORS.beige,
