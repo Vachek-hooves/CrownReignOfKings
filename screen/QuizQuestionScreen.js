@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     padding: 5,
     marginBottom: 10,
     borderRadius: 5,
-    height: 70,
+    height: 80,
     justifyContent: 'center',
   },
   correctOption: {

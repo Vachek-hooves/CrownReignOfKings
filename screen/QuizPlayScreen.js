@@ -73,7 +73,7 @@ const QuizPlayScreen = ({navigation}) => {
           showsVerticalScrollIndicator={false}
         />
       </View>
-      <View style={{height: 50}}></View>
+      <View style={{height: 60}}></View>
       <IconReturnSword />
       <Modal
         visible={selectedLevel !== null}
