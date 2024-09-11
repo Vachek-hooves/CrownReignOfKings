@@ -6,6 +6,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {MainImageLayout} from '../components/Layout';
@@ -73,58 +74,62 @@ const ProfileScreen = () => {
 
   return (
     <MainImageLayout>
-      <View style={styles.container}>
-        <ImagePicker handleImage={handleImage} btnStyle={styles.imagePicker}>
-          {image ? (
-            <Image source={{uri: image}} style={styles.profileImage} />
+      <ScrollView
+        contentContainerStyle={{height: '105%'}}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+          <ImagePicker handleImage={handleImage} btnStyle={styles.imagePicker}>
+            {image ? (
+              <Image source={{uri: image}} style={styles.profileImage} />
+            ) : (
+              <View style={styles.placeholderImage}>
+                <Text>Tap to add image</Text>
+              </View>
+            )}
+          </ImagePicker>
+
+          {isEditing ? (
+            <TextInput
+              style={styles.input}
+              onChangeText={setName}
+              value={name}
+              placeholder="Enter your name"
+            />
           ) : (
-            <View style={styles.placeholderImage}>
-              <Text>Tap to add image</Text>
-            </View>
+            <Text style={styles.nameText}>{name}</Text>
           )}
-        </ImagePicker>
 
-        {isEditing ? (
-          <TextInput
-            style={styles.input}
-            onChangeText={setName}
-            value={name}
-            placeholder="Enter your name"
-          />
-        ) : (
-          <Text style={styles.nameText}>{name}</Text>
-        )}
+          {isEditing ? (
+            <TouchableOpacity style={styles.saveButton} onPress={saveUserData}>
+              <Text style={styles.buttonText}>Save</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.editButton}
+              onPress={() => setIsEditing(true)}>
+              <Text style={styles.buttonText}>Edit Profile</Text>
+            </TouchableOpacity>
+          )}
 
-        {isEditing ? (
-          <TouchableOpacity style={styles.saveButton} onPress={saveUserData}>
-            <Text style={styles.buttonText}>Save</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={styles.editButton}
-            onPress={() => setIsEditing(true)}>
-            <Text style={styles.buttonText}>Edit Profile</Text>
-          </TouchableOpacity>
-        )}
+          {saveMessage ? (
+            <Text style={styles.saveMessage}>{saveMessage}</Text>
+          ) : null}
 
-        {saveMessage ? (
-          <Text style={styles.saveMessage}>{saveMessage}</Text>
-        ) : null}
-
-        <View style={styles.quizScoresContainer}>
-          <Text style={styles.quizScoresTitle}>Quiz Scores</Text>
-          <View style={styles.tableHeader}>
-            <Text style={styles.headerCell}>Quiz Name</Text>
-            <Text style={styles.headerCell}>Score</Text>
-          </View>
-          {crownQuiz.map(quiz => (
-            <View key={quiz.id} style={styles.tableRow}>
-              <Text style={styles.cell}>{quiz.name}</Text>
-              <Text style={styles.cell}>{quiz.levelScore}</Text>
+          <View style={styles.quizScoresContainer}>
+            <Text style={styles.quizScoresTitle}>Quiz Scores</Text>
+            <View style={styles.tableHeader}>
+              <Text style={styles.headerCell}>Quiz Name</Text>
+              <Text style={styles.headerCell}>Score</Text>
             </View>
-          ))}
+            {crownQuiz.map(quiz => (
+              <View key={quiz.id} style={styles.tableRow}>
+                <Text style={styles.cell}>{quiz.name}</Text>
+                <Text style={styles.cell}>{quiz.levelScore}</Text>
+              </View>
+            ))}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </MainImageLayout>
   );
 };
@@ -221,7 +226,7 @@ const styles = StyleSheet.create({
   cell: {
     flex: 1,
     color: COLORS.beige,
-    fontSize:16
+    fontSize: 16,
   },
 });
 
