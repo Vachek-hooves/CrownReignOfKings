@@ -11,14 +11,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {MainImageLayout} from '../components/Layout';
 import ImagePicker from '../components/ui/ImagePicker';
 import {COLORS} from '../constant/color';
+import {useCrownQuiz} from '../store/crown_store';
 
 const USER_KEY = '@user_data';
 
 const ProfileScreen = () => {
+  const {crownQuiz} = useCrownQuiz();
   const [name, setName] = useState('');
   const [image, setImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
+
   // console.log(image);
 
   useEffect(() => {
@@ -32,7 +35,6 @@ const ProfileScreen = () => {
         const {name, image} = JSON.parse(userData);
         setName(name);
 
-
         if (
           image &&
           (image.startsWith('file://') || image.startsWith('http'))
@@ -41,7 +43,6 @@ const ProfileScreen = () => {
         } else {
           setImage(null);
         }
-
       } else {
         setIsEditing(true); // If no user data, go straight to editing mode
       }
@@ -65,11 +66,8 @@ const ProfileScreen = () => {
 
   const handleImage = images => {
     if (images && images.length > 0) {
-
       // Ensure we're saving the full URI of the image
       setImage(images[0].uri || images[0]);
-
-
     }
   };
 
@@ -112,6 +110,20 @@ const ProfileScreen = () => {
         {saveMessage ? (
           <Text style={styles.saveMessage}>{saveMessage}</Text>
         ) : null}
+
+        <View style={styles.quizScoresContainer}>
+          <Text style={styles.quizScoresTitle}>Quiz Scores</Text>
+          <View style={styles.tableHeader}>
+            <Text style={styles.headerCell}>Quiz Name</Text>
+            <Text style={styles.headerCell}>Score</Text>
+          </View>
+          {crownQuiz.map(quiz => (
+            <View key={quiz.id} style={styles.tableRow}>
+              <Text style={styles.cell}>{quiz.name}</Text>
+              <Text style={styles.cell}>{quiz.levelScore}</Text>
+            </View>
+          ))}
+        </View>
       </View>
     </MainImageLayout>
   );
@@ -179,6 +191,37 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
     color: 'green',
+  },
+  quizScoresContainer: {
+    width: '100%',
+    marginTop: 20,
+  },
+  quizScoresTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: COLORS.beige,
+  },
+  tableHeader: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.beige,
+    paddingBottom: 5,
+    marginBottom: 5,
+  },
+  headerCell: {
+    flex: 1,
+    fontWeight: 'bold',
+    color: COLORS.beige,
+  },
+  tableRow: {
+    flexDirection: 'row',
+    paddingVertical: 5,
+  },
+  cell: {
+    flex: 1,
+    color: COLORS.beige,
+    fontSize:16
   },
 });
 
